@@ -9,7 +9,14 @@ const typeDefs = `#graphql
     updatedAt: String!
     bio: String
     avatar: String
+    following: [User]
+    followers: [User]
+    totalFollowers: Int!
+    totalFollowing: Int!
+    isMe: Boolean!
+    isFollowing: Boolean!
   }
 `;
 
 export default typeDefs;
+// 

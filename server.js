@@ -16,7 +16,7 @@ import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 const app = express();
 const PORT = process.env.PORT;
 const httpServer = http.createServer(app);
-const server = new ApolloServer({
+const apollo = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
@@ -27,7 +27,7 @@ const server = new ApolloServer({
 //   optionsSuccessStatus: 200, // 응답 상태 200으로 설정
 // };
 
-await server.start();
+await apollo.start();
 
 
 
@@ -37,7 +37,7 @@ app.use(
   // cors(options),
   json(),
   graphqlUploadExpress(),
-  expressMiddleware(server, {
+  expressMiddleware(apollo, {
     context: async ({ req }) => {
       return {
         loggedInUser: await getUser(req.headers.token),

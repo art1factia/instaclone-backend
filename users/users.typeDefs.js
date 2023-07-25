@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type User {
-    id: String!
+    id: Int!
     firstName: String!
     lastName: String
     username: String!
@@ -9,6 +9,8 @@ const typeDefs = `#graphql
     updatedAt: String!
     bio: String
     avatar: String
+    photos: [Photo] 
+    comments: [Comment]
     following: [User]
     followers: [User]
     totalFollowers: Int!

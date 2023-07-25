@@ -3,7 +3,7 @@ import client from "../../client.js"
 export default {
   Query: {
     seeFollowers: async (_, { username, page }) => {
-      const ok = client.user.findUnique({ where: { username }, select: {id: true} })
+      const ok = client.user.findUnique({ where: { username }, select: {id: true} }) //select: 데이터베이스에서 username 외 불필요한 정보를 불러오지 X
       console.log(ok)
       if (!ok) {
         return {

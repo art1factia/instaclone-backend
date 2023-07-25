@@ -18,12 +18,16 @@ export default {
       //   .following({ where: { id } })
 
       const exists = await client.user.count({
-        where: { username: loggedInUser.username,
-          following: { some: { id } } },
+        where: {
+          username: loggedInUser.username,
+          following: { some: { id } }
+        },
       })
 
       return Boolean(exists)
 
-    }
+    },
+    photos: ({ id }) => client.user.findUnique({ where: { id } }).photos
+
   }
 }

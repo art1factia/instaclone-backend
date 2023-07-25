@@ -15,7 +15,7 @@ export default {
         .findUnique({ where: { username, } })
         .following({
           take: 2,
-          skip: 1,
+          skip: lastId ? 1 : 0,
           ...(lastId && { cursor: { id: lastId } })
         })
       return {

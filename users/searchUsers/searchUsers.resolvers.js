@@ -3,7 +3,6 @@ import client from "../../client.js"
 export default {
   Query: {
     searchUsers: async (_, { keyword,lastId }) => {
-      console.log(keyword)
       const users = await client.user
       .findMany({ 
         where: { username: { startsWith: keyword.toLowerCase() } },

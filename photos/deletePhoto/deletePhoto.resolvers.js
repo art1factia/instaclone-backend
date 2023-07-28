@@ -1,10 +1,11 @@
 import client from "../../client.js";
+import { delPhotoS3 } from "../../shared/shared.utils.js";
 import { protectedResolver } from "../../users/users.utils.js";
 
 export default {
   Mutation: {
     deletePhoto: protectedResolver(async (_, { id }, { loggedInUser }) => {
-      const photo = await client.photo.findUnique({ where: { id }, select: { userId: true } })
+      const photo = await client.photo.findUnique({ where: { id }, select: { userId: true, file: true, } })
       if (!photo) {
         return {
           ok: false,
@@ -17,7 +18,8 @@ export default {
           error: "승인되지 않은 사용자입니다."
         }
       } else {
-        await client.photo.delete({ where: { id } })
+        const {file} = await client.photo.delete({ where: { id } })
+        delPhotoS3(file, "uploads")
         return {
           ok: true
         }

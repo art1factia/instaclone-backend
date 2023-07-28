@@ -2,7 +2,7 @@ const typeDefs = `#graphql
   type Photo {
     id: Int!
     user: User!
-    file: String!
+    file: Upload!
     caption: String
     hashtags: [Hashtag]
     comments: Int!

@@ -6,7 +6,7 @@ export default {
     sendMessage: protectedResolver(async (_, { payload, roomId, userId }, { loggedInUser }) => {
       let room = null
       if (userId) {
-        const user = client.user.findUnique({ where: { id: userId }, select: { id: true } })
+        const user = await client.user.findUnique({ where: { id: userId }, select: { id: true } })
         if (!user) {
           return {
             ok: false,
@@ -24,13 +24,16 @@ export default {
           }
         }
       }
-      const newMessage = client.message.create({
+      const newMessage = await client.message.create({
         data: {
           payload,
-          user: { connect: { id: loggedInUser.id } },
-          room: { connect: { id: room.id } }
+          users: { connect: { id: loggedInUser.id } },
+          room: { connect: { id: room.id } },
         }
       })
+      return {
+        ok: true
+      }
     })
   }
 }

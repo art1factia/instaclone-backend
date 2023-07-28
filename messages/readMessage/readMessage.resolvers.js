@@ -13,7 +13,7 @@ export default {
         },
         select: { id: true }
       })
-      if (!ok) {
+      if (!message) {
         return {
           ok: false,
           error: "읽을 수 있는 메세지가 존재하지 않습니다."

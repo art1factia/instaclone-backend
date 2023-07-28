@@ -3,7 +3,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     uploadPhoto(
-      file: String!,
+      file: Upload!,
       caption: String
     ): Photo!
   }

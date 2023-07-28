@@ -5,9 +5,11 @@ export default {
   Query: {
     seeRooms: protectedResolver(
       async (_, __, { loggedInUser }) => {
-        const rooms = client.room.findMany({ where: { users: { some: { id: loggedInUser.id } } } })
+        const rooms = await client.room.findMany({
+          where: { users: { some: { id: loggedInUser.id } } },
+        })
         return rooms
-      
+
       }
     )
   }

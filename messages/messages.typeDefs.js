@@ -11,7 +11,7 @@ const typeDefs = `#graphql
   type Room {
     id: Int!
     users: [User]
-    messages(lastId: Int!): [Message]
+    messages: [Message]
     unreadTotal: Int!
     createdAt: String!
     updatedAt: String!

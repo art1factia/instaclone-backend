@@ -84,7 +84,7 @@ model Room {
 
 model Message {
   id        Int      @id @default(autoincrement())
-  users     User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   payload   String
   room      Room     @relation(fields: [roomId], references: [id])
   userId    Int
